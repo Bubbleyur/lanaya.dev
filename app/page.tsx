@@ -1,65 +1,198 @@
+"use client";
+
 import Image from "next/image";
+import React from "react";
+import TextType from '@/components/typography/TextType';
+import { ProjectCard } from '@/components/portfolio/project-card';
+import { usePalette } from "@/context/PaletteContext";
+import TerminalSection from "@/components/ui/TerminalSection";
+import { projectsData } from '@/constants/portfolio/project';
+import { AboutCard } from "@/components/ui/AboutCard";
+import { LanyardCard } from "@/components/ui/LanyardCard";
+import { Brain, Quote } from "lucide-react";
 
 export default function Home() {
+  const { currentPalette } = usePalette();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* SECTION 1: HERO */}
+      <TerminalSection id="hero" className="min-h-screen justify-center items-center px-4">
+        <div className="relative w-full max-w-5xl">
+          {/* Subtle background element */}
+          <div className="absolute -top-20 -left-20 w-64 h-64 bg-stone-900 rounded-full blur-[100px] opacity-20 pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col md:flex-row gap-12 items-start">
+            <div className="flex-1 space-y-8">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-800 bg-stone-900/50" style={{ borderColor: `${currentPalette.tint}22` }}>
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: currentPalette.tint }} />
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-stone-500">System initialization complete</span>
+                </div>
+                
+                <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1]" style={{ color: currentPalette.tint }}>
+                  {/* @ts-ignore */}
+                  <TextType 
+                    text={["BUILDING", "CODING", "SOLVING"]}
+                    typingSpeed={100}
+                    pauseDuration={2000}
+                    showCursor
+                    cursorCharacter="_"
+                  />
+                  <br />
+                  <span className="text-white">FUTURE.SYS</span>
+                </h1>
+              </div>
+
+              <p className="text-lg md:text-xl text-stone-400 max-w-xl font-mono leading-relaxed">
+                <span style={{ color: currentPalette.tint }}>{`>`}</span> a junior developer dedicated to crafting seamless digital ecosystems and robust architecture.
+              </p>
+
+              <div className="flex flex-wrap gap-4 pt-4">
+                <button 
+                  className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                  style={{ 
+                    backgroundColor: currentPalette.tint, 
+                    borderColor: currentPalette.tint,
+                    color: currentPalette.background 
+                  }}
+                >
+                  Retrieve Projects
+                </button>
+                <button 
+                  className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800"
+                  style={{ 
+                    borderColor: `${currentPalette.tint}44`,
+                    color: currentPalette.tint
+                  }}
+                >
+                  Contact Admin
+                </button>
+              </div>
+            </div>
+
+            <div className="w-full md:w-80 space-y-4">
+              <div className="p-6 border bg-stone-900/40 backdrop-blur-sm space-y-4" style={{ borderColor: `${currentPalette.tint}11` }}>
+                <div className="flex justify-between items-center text-[10px] text-stone-600 uppercase tracking-widest">
+                  <span>Connection</span>
+                  <span className="text-green-500">Encrypted</span>
+                </div>
+                <div className="space-y-2">
+                  <div className="h-1 w-full bg-stone-800">
+                    <div className="h-full bg-stone-600 w-3/4" style={{ backgroundColor: currentPalette.tint }} />
+                  </div>
+                  <div className="h-1 w-full bg-stone-800">
+                    <div className="h-full bg-stone-600 w-1/2" style={{ backgroundColor: currentPalette.tint }} />
+                  </div>
+                </div>
+                <p className="text-[10px] font-mono text-stone-500">
+                  METRICS: CPU_STABLE // RAM_OPTIMIZED // DISK_SYNCED
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </TerminalSection>
+
+      {/* SECTION 2: ABOUT */}
+      <TerminalSection id="about" className="py-24">
+        <div className="w-full max-w-5xl px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+            <div className="space-y-6 flex-row justify-items-center">
+              {/* Profile Image with Terminal Frame */}
+              <div className="relative w-32 h-32 md:w-50 md:h-50 group">
+                <div 
+                  className="absolute inset-0 border-2 z-10 transition-transform duration-300 group-hover:scale-105"
+                  style={{ borderColor: currentPalette.tint }}
+                />
+                <div 
+                  className="absolute -inset-2 border opacity-20 z-0 animate-pulse"
+                  style={{ borderColor: currentPalette.tint }}
+                />
+                <Image 
+                  src="https://res.cloudinary.com/drrleg8t2/image/upload/v1770549330/WhatsApp_Image_2026-02-08_at_18.09.29_e0caxm.jpg" // High quality stylized placeholder
+                  alt="Alan Profile"
+                  fill
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute top-0 right-0 p-1 bg-black/80 z-20 text-[8px] font-mono tracking-tighter" style={{ color: currentPalette.tint }}>
+                  ALAN_OS.IMG
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <span className="text-xs uppercase tracking-[0.5em] opacity-40">System_Profile</span>
+                <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                  Who is <span style={{ color: currentPalette.tint }}>Alan</span>?
+                </h2>
+              </div>
+            </div>
+
+            <div 
+              className="max-w-xl p-8 border bg-stone-900/40 backdrop-blur-md relative"
+              style={{ borderColor: `${currentPalette.tint}33` }}
+            >
+              <div 
+                className="absolute top-0 left-0 w-8 h-[2px]" 
+                style={{ backgroundColor: currentPalette.tint }}
+              />
+              <div 
+                className="absolute top-0 left-0 w-[2px] h-8" 
+                style={{ backgroundColor: currentPalette.tint }}
+              />
+              
+              <div className="space-y-6">
+                <p 
+                  className="text-lg md:text-xl font-mono leading-relaxed font-bold"
+                  style={{ 
+                    color: `${currentPalette.tint}ff`,
+                    textShadow: `0 0 10px ${currentPalette.tint}44`
+                  }}
+                >
+                  <span className="opacity-50 mr-2">$</span> Decoding life through code, coffee, and constant curiosity. I specialize in bridging the gap between complex backend logic and intuitive, human-centric frontend experiences.
+                </p>
+                <p className="text-stone-100 text-sm md:text-base font-mono leading-relaxed font-medium opacity-90">
+                  Exploring the intersection of human psychology and digital interfaces, I build systems that aren't just functional, but feel alive. My philosophy is rooted in technical excellence and the belief that every line of code is an opportunity to solve a puzzle.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <LanyardCard />
+            
+            <AboutCard 
+              title="Personality"
+              description="Driven by logical analysis and patterns. An INTP architect type who find solace in complex structures and elegant solutions."
+              icon={<Brain size={20} />}
+            />
+
+            <AboutCard 
+              title="Philosophy"
+              description="Simplifying the complex. I believe code should be as expressive as a poem and as reliable as a clockwork mechanism."
+              icon={<Quote size={20} />}
+            />
+          </div>
+        </div>
+      </TerminalSection>
+
+      {/* SECTION 3: PROJECTS */}
+      <TerminalSection id="project">
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-200 mb-6">
+            find my doings
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-base md:text-lg text-slate-100/60 max-w-2xl">
+            Check out my curated projects and experiments.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
+          {projectsData.map((project, idx) => (
+            <ProjectCard key={idx} project={project} />
+          ))}
         </div>
-      </main>
-    </div>
+      </TerminalSection>
+    </>
   );
 }
