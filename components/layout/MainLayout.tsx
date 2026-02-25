@@ -24,7 +24,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isExiting } = useTransitionNav();
   const pathname = usePathname();
   
-  const isBlogPage = pathname?.startsWith('/blog');
+  const isPage = pathname === '/';
 
   useEffect(() => {
     setIsMounted(true);
@@ -82,7 +82,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
               
               {/* LAYER BACKGROUND */}
               <div className="col-start-1 row-start-1 sticky top-0 w-full h-screen z-0">
-                {showTerminal && !isBlogPage && (
+                {showTerminal && isPage && (
                   <FaultyTerminal
                     scale={1.5}
                     digitSize={1.2}
@@ -103,7 +103,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
                   />
                 )}
                 
-                {isBlogPage && (
+                {!isPage && (
                   <div className="absolute inset-0 bg-[#080808] opacity-100 transition-opacity duration-1000" />
                 )}
               </div>
