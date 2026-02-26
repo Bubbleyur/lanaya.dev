@@ -6,13 +6,29 @@ import TextType from '@/components/typography/TextType';
 import { ProjectCard } from '@/components/portfolio/project-card';
 import { usePalette } from "@/context/PaletteContext";
 import TerminalSection from "@/components/ui/TerminalSection";
-import { projectsData } from '@/constants/portfolio/project';
+import { projectsData, ProjectItem } from '@/constants/portfolio/project';
 import { AboutCard } from "@/components/ui/AboutCard";
 import { LanyardCard } from "@/components/ui/LanyardCard";
 import { Brain, Quote } from "lucide-react";
 
 export default function Home() {
   const { currentPalette } = usePalette();
+  const [projects, setProjects] = React.useState<ProjectItem[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch projects:", err);
+        setProjects(projectsData); // Fallback to static data
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -163,13 +179,13 @@ export default function Home() {
             
             <AboutCard 
               title="Personality"
-              description="Driven by logical analysis and patterns. An INTP architect type who find solace in complex structures and elegant solutions."
+              description="An ENTP driven by curiosity and bold ideas — thriving on challenging norms and reshaping them into smarter solutions."
               icon={<Brain size={20} />}
             />
 
             <AboutCard 
               title="Philosophy"
-              description="Simplifying the complex. I believe code should be as expressive as a poem and as reliable as a clockwork mechanism."
+              description="Ideas only matter when executed. I break, refine, and rebuild systems — turning curiosity into clean, working structure."
               icon={<Quote size={20} />}
             />
           </div>
@@ -188,9 +204,15 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
-          {projectsData.map((project, idx) => (
-            <ProjectCard key={idx} project={project} />
-          ))}
+          {loading ? (
+            <div className="col-span-full py-12 text-center font-mono opacity-50">
+              [ INITIALIZING_REPOSITORY_ACCESS... ]
+            </div>
+          ) : (
+            projects.slice(0, 4).map((project, idx) => ( // Show first 4 on home
+              <ProjectCard key={idx} project={project} />
+            ))
+          )}
         </div>
       </TerminalSection>
     </>

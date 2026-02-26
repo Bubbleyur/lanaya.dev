@@ -6,12 +6,28 @@ import Link from "next/link";
 import { ExternalLink, Mail, MessageSquareText, Rocket } from "lucide-react";
 import TerminalSection from "@/components/ui/TerminalSection";
 import { ProjectCard } from "@/components/portfolio/project-card";
-import { projectsData } from "@/constants/portfolio/project";
+import { projectsData, ProjectItem } from "@/constants/portfolio/project";
 import { usePalette } from "@/context/PaletteContext";
 import TextType from "@/components/typography/TextType";
 
 export default function ProjectsPage() {
   const { currentPalette } = usePalette();
+  const [projects, setProjects] = React.useState<ProjectItem[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch projects:", err);
+        setProjects(projectsData); // Fallback
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="flex flex-col w-full">
@@ -52,7 +68,7 @@ export default function ProjectsPage() {
                 ))}
               </div>
               <span className="text-[10px] font-mono text-stone-500 uppercase tracking-widest">
-                {projectsData.length} Total Repositories
+                {loading ? "..." : projects.length} Total Repositories
               </span>
             </div>
           </div>
@@ -71,15 +87,21 @@ export default function ProjectsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projectsData.map((project, idx) => (
-              <ProjectCard 
-                key={idx} 
-                project={project}
-                classNames={{
-                  container: "group/card h-full flex flex-col hover:border-tint/30 transition-colors duration-500",
-                }}
-              />
-            ))}
+            {loading ? (
+              <div className="col-span-full py-24 text-center font-mono opacity-50">
+                [ ACCESSING_ARCHIVE_DATA... ]
+              </div>
+            ) : (
+              projects.map((project, idx) => (
+                <ProjectCard 
+                  key={idx} 
+                  project={project}
+                  classNames={{
+                    container: "group/card h-full flex flex-col hover:border-tint/30 transition-colors duration-500",
+                  }}
+                />
+              ))
+            )}
           </div>
         </div>
       </TerminalSection>

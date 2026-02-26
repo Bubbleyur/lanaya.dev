@@ -30,29 +30,29 @@ const Footer = () => {
         
         <div className="flex flex-col gap-1 uppercase">
           <p className="hover:text-purple-300 transition-colors cursor-default">
-            © 2026 ALAN_PORTFOLIO_SYSTEM
+            © 2026 ALAN's PORTOFOLIO
           </p>
           <p className="text-[9px] opacity-40">
-            ALL RIGHTS RESERVED. UNAUTHORIZED ACCESS IS PROHIBITED.
+            ALL RIGHTS RESERVED.
           </p>
         </div>
 
         <div className="flex items-center gap-8">
           <div className="hidden md:block opacity-30 italic">
-            LOC_ID: 127.0.0.1
+            Surabaya — GMT+7
           </div>
           
           <nav className="flex gap-6">
-            <a href="https://github.com" target="_blank" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
+            <a href="https://github.com/Bubbleyur" target="_blank" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
               [ GITHUB ]
             </a>
-            <a href="https://linkedin.com" target="_blank" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
+            <a href="https://www.linkedin.com/in/alan-wijaya-9880603a8/" target="_blank" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
               [ LINKEDIN ]
             </a>
           </nav>
           
           <div className="hidden lg:block opacity-30 uppercase">
-            LATENCY: NO_DRAG
+            Iterate • Break • Rebuild
           </div>
         </div>
       </div>

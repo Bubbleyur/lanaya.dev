@@ -6,6 +6,7 @@ import { ExternalLink, Github, Terminal } from "lucide-react";
 import type { ProjectItem } from "@/constants/portfolio/project";
 import { cn } from "@/lib/utils";
 import { usePalette } from "@/context/PaletteContext";
+import { Badge } from "@/components/ui/badge";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,6 +36,22 @@ export function ProjectCard({
 }) {
   const { currentPalette } = usePalette();
 
+  const [imgSrc, setImgSrc] = React.useState(project.imageId);
+  const [fallbacksTried, setFallbacksTried] = React.useState(0);
+
+  const handleImageError = () => {
+    if (fallbacksTried === 0) {
+      // Try master branch
+      const masterUrl = project.imageId.replace("/main/", "/master/");
+      setImgSrc(masterUrl);
+      setFallbacksTried(1);
+    } else if (fallbacksTried === 1) {
+      // Try cloudinary fallback
+      setImgSrc("https://res.cloudinary.com/drrleg8t2/image/upload/v1768145350/samples/animals/cat.jpg");
+      setFallbacksTried(2);
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -58,9 +75,10 @@ export function ProjectCard({
         style={{ borderColor: `${currentPalette.tint}11` }}
       >
         <Image
-          src={project.imageId}
+          src={imgSrc}
           alt={project.title}
           fill
+          onError={handleImageError}
           className={cn(
             "object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110",
             classNames?.image,
@@ -80,11 +98,18 @@ export function ProjectCard({
       <div className={cn("flex flex-col gap-4 p-6 relative z-10", classNames?.content)}>
         <div className="space-y-2">
           {/* Badges */}
-          {project.badge && project.badge.length > 0 && (
+          {((project.badge && project.badge.length > 0) || (project.badges && project.badges.length > 0)) && (
             <div className="flex flex-wrap gap-2">
-              {project.badge.map((badge, i) => (
-                <div key={i} className="scale-90 origin-left">
+              {project.badge?.map((badge, i) => (
+                <div key={`badge-${i}`} className="scale-90 origin-left">
                   {badge}
+                </div>
+              ))}
+              {project.badges?.map((badge, i) => (
+                <div key={`badges-${i}`} className="scale-90 origin-left">
+                  <Badge variant="outline" className="border-stone-800 bg-stone-900/50 text-stone-400">
+                    {badge}
+                  </Badge>
                 </div>
               ))}
             </div>

@@ -69,14 +69,8 @@ float fbm(vec2 p)
   mat2 modify0 = rotate(time * 0.02);
   f += amp * noise(p);
   p = modify0 * p * 2.0;
-  amp *= 0.454545;
+  amp *= 0.45;
   
-  mat2 modify1 = rotate(time * 0.02);
-  f += amp * noise(p);
-  p = modify1 * p * 2.0;
-  amp *= 0.454545;
-  
-  mat2 modify2 = rotate(time * 0.08);
   f += amp * noise(p);
   
   return f;
@@ -152,7 +146,6 @@ float displace(vec2 look)
 }
 
 vec3 getColor(vec2 p){
-    
     float bar = step(mod(p.y + time * 20.0, 1.0), 0.2) * 0.4 + 1.0;
     bar *= uScanlineIntensity;
     
@@ -160,18 +153,19 @@ vec3 getColor(vec2 p){
     p.x += displacement;
 
     if (uGlitchAmount != 1.0) {
-      float extra = displacement * (uGlitchAmount - 1.0);
-      p.x += extra;
+      p.x += displacement * (uGlitchAmount - 1.0);
     }
 
     float middle = digit(p);
     
+    // Reduced blur samples from 9 to 5 (cross shape)
     const float off = 0.002;
-    float sum = digit(p + vec2(-off, -off)) + digit(p + vec2(0.0, -off)) + digit(p + vec2(off, -off)) +
-                digit(p + vec2(-off, 0.0)) + digit(p + vec2(0.0, 0.0)) + digit(p + vec2(off, 0.0)) +
-                digit(p + vec2(-off, off)) + digit(p + vec2(0.0, off)) + digit(p + vec2(off, off));
+    float sum = digit(p + vec2(-off, 0.0)) + 
+                digit(p + vec2(off, 0.0)) + 
+                digit(p + vec2(0.0, -off)) + 
+                digit(p + vec2(0.0, off));
     
-    vec3 baseColor = vec3(0.9) * middle + sum * 0.1 * vec3(1.0) * bar;
+    vec3 baseColor = vec3(0.9) * middle + sum * 0.225 * vec3(1.0) * bar;
     return baseColor;
 }
 
@@ -195,8 +189,9 @@ void main() {
 
     if(uChromaticAberration != 0.0){
       vec2 ca = vec2(uChromaticAberration) / iResolution.xy;
-      col.r = getColor(p + ca).r;
-      col.b = getColor(p - ca).b;
+      // Optimized: only sample digit intensity for CA instead of full getColor blur
+      col.r = digit(p + ca);
+      col.b = digit(p - ca);
     }
 
     col *= uTint;
@@ -207,7 +202,7 @@ void main() {
       col += (rnd - 0.5) * (uDither * 0.003922);
     }
 
-    // This adds a very faint 'electric' floor to the black areas
+    // Faint 'electric' background noise
     vec3 backgroundNoise = vec3(hash21(uv + iTime * 0.01)) * 0.02; 
     gl_FragColor = vec4(col + backgroundNoise, 1.0);
 }
@@ -240,7 +235,7 @@ export default function FaultyTerminal({
   tint = '#ffffff',
   mouseReact = true,
   mouseStrength = 0.2,
-  dpr = Math.min(window.devicePixelRatio || 1, 2),
+  dpr = Math.min(window.devicePixelRatio || 1, 1.5),
   pageLoadAnimation = true,
   brightness = 1,
   className,
@@ -274,9 +269,18 @@ export default function FaultyTerminal({
     const ctn = containerRef.current;
     if (!ctn) return;
 
-    const renderer = new Renderer({ dpr });
+    let renderer;
+    let gl;
+    try {
+      renderer = new Renderer({ dpr });
+      gl = renderer.gl;
+      if (!gl) throw new Error('WebGL not supported');
+    } catch (e) {
+      console.warn('FaultyTerminal: WebGL initialization failed', e);
+      return;
+    }
+
     rendererRef.current = renderer;
-    const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 1);
 
     const geometry = new Triangle(gl);
