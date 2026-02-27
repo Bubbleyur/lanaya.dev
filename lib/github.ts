@@ -11,7 +11,7 @@ export interface GithubRepo {
 }
 
 export async function getGithubProjects() {
-  const username = process.env.GITHUB_USERNAME;
+  const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME;
   const token = process.env.GITHUB_TOKEN;
 
   if (!username) {
