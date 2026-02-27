@@ -73,9 +73,9 @@ export const LanyardCard = () => {
 
   useEffect(() => {
     const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
-    const LASTFM_USERNAME = process.env.LASTFM_USERNAME;
+    const NEXT_PUBLIC_LASTFM_USERNAME = process.env.LASTFM_USERNAME;
     
-    if (!LASTFM_API_KEY || !LASTFM_USERNAME) return;
+    if (!LASTFM_API_KEY || !NEXT_PUBLIC_LASTFM_USERNAME) return;
 
     const fetchLastfm = async () => {
       try {

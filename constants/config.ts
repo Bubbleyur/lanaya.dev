@@ -1,4 +1,5 @@
 export const MAIN_WEBSITE_URL = "https://lanaya.dev";
+export const CLOUDINARY_CLOUD_NAME = "drrleg8t2";
 
 export interface VentureItem {
   title: string;

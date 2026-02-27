@@ -18,10 +18,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { getOptimizedImage } from "@/lib/cloudinary";
 
 export function ProjectCard({
   project,
   classNames,
+  priority = false,
 }: {
   project: ProjectItem;
   classNames?: {
@@ -33,6 +35,7 @@ export function ProjectCard({
     description?: string;
     links?: string;
   };
+  priority?: boolean;
 }) {
   const { currentPalette } = usePalette();
 
@@ -46,8 +49,8 @@ export function ProjectCard({
       setImgSrc(masterUrl);
       setFallbacksTried(1);
     } else if (fallbacksTried === 1) {
-      // Try cloudinary fallback
-      setImgSrc("https://res.cloudinary.com/drrleg8t2/image/upload/v1768145350/samples/animals/cat.jpg");
+      // Try cloudinary fallback (using the optimized version of a placeholder if needed)
+      setImgSrc("https://res.cloudinary.com/drrleg8t2/image/upload/f_auto,q_auto,w_1200/samples/animals/cat.jpg");
       setFallbacksTried(2);
     }
   };
@@ -75,9 +78,11 @@ export function ProjectCard({
         style={{ borderColor: `${currentPalette.tint}11` }}
       >
         <Image
-          src={imgSrc}
+          src={getOptimizedImage(imgSrc, 800)}
           alt={project.title}
           fill
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           onError={handleImageError}
           className={cn(
             "object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110",

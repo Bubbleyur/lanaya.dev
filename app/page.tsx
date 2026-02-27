@@ -129,6 +129,8 @@ export default function Home() {
                   src="https://res.cloudinary.com/drrleg8t2/image/upload/v1770549330/WhatsApp_Image_2026-02-08_at_18.09.29_e0caxm.jpg" // High quality stylized placeholder
                   alt="Alan Profile"
                   fill
+                  priority
+                  sizes="(max-width: 768px) 128px, 200px"
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute top-0 right-0 p-1 bg-black/80 z-20 text-[8px] font-mono tracking-tighter" style={{ color: currentPalette.tint }}>
@@ -210,7 +212,7 @@ export default function Home() {
             </div>
           ) : (
             projects.slice(0, 4).map((project, idx) => ( // Show first 4 on home
-              <ProjectCard key={idx} project={project} />
+              <ProjectCard key={idx} project={project} priority={idx < 2} />
             ))
           )}
         </div>

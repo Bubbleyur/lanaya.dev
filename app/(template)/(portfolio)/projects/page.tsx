@@ -95,6 +95,7 @@ export default function ProjectsPage() {
                 <ProjectCard 
                   key={idx} 
                   project={project}
+                  priority={idx < 2}
                   classNames={{
                     container: "group/card h-full flex flex-col hover:border-tint/30 transition-colors duration-500",
                   }}

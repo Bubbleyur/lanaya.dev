@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { usePalette } from "@/context/PaletteContext";
 import { Badge } from "@/components/ui/badge";
 import type { VentureItem } from "@/constants/config";
+import { getOptimizedImage } from "@/lib/cloudinary";
 
 const TypeIcon = ({ type, size = 14 }: { type: VentureItem["type"], size?: number }) => {
   switch (type) {
@@ -20,6 +21,7 @@ const TypeIcon = ({ type, size = 14 }: { type: VentureItem["type"], size?: numbe
 export function VentureCard({
   venture,
   classNames,
+  priority = false,
 }: {
   venture: VentureItem;
   classNames?: {
@@ -31,6 +33,7 @@ export function VentureCard({
     description?: string;
     links?: string;
   };
+  priority?: boolean;
 }) {
   const { currentPalette } = usePalette();
 
@@ -61,9 +64,11 @@ export function VentureCard({
           style={{ borderColor: `${currentPalette.tint}11` }}
         >
           <Image
-            src={imgSrc}
+            src={getOptimizedImage(imgSrc, 800)}
             alt={venture.title}
             fill
+            priority={priority}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={cn(
               "object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110",
               classNames?.image,
