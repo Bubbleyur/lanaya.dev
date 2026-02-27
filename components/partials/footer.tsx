@@ -1,8 +1,32 @@
 import React from 'react';
+import { usePalette } from '@/context/PaletteContext';
 
 const Footer = () => {
+  const { currentPalette } = usePalette();
+
   return (
-    <footer className="relative w-full overflow-hidden bg-black py-10 px-8 border-t border-purple-900/20 font-mono">
+    <footer 
+      className="relative w-full overflow-hidden bg-black py-10 px-8 border-t font-mono"
+      style={{ borderColor: `${currentPalette.tint}33` }}
+    >
+      <style dangerouslySetInnerHTML={{ __html: `
+        .footer-text-primary {
+          color: ${currentPalette.tint}b3;
+        }
+        .footer-text-secondary {
+          color: ${currentPalette.tint}66;
+        }
+        .footer-link {
+          transition: all 0.3s ease;
+        }
+        .footer-link:hover {
+          color: white;
+          filter: drop-shadow(0 0 8px ${currentPalette.tint}cc);
+        }
+        .footer-copyright:hover {
+          color: ${currentPalette.tint};
+        }
+      `}} />
       
       {/* 1. SVG Noise Filter Definition (Hidden) */}
       <svg className="absolute w-0 h-0 invisible">
@@ -26,13 +50,13 @@ const Footer = () => {
       <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_3px,2px_100%]" />
 
       {/* 4. Content Container */}
-      <div className="relative z-20 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] md:text-xs tracking-[0.2em] text-purple-400/70">
+      <div className="relative z-20 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] md:text-xs tracking-[0.2em] footer-text-primary">
         
         <div className="flex flex-col gap-1 uppercase">
-          <p className="hover:text-purple-300 transition-colors cursor-default">
+          <p className="footer-copyright transition-colors cursor-default">
             © 2026 ALAN's PORTOFOLIO
           </p>
-          <p className="text-[9px] opacity-40">
+          <p className="text-[9px] footer-text-secondary">
             ALL RIGHTS RESERVED.
           </p>
         </div>
@@ -43,10 +67,10 @@ const Footer = () => {
           </div>
           
           <nav className="flex gap-6">
-            <a href="https://github.com/Bubbleyur" target="_blank" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
+            <a href="https://github.com/Bubbleyur" target="_blank" className="footer-link">
               [ GITHUB ]
             </a>
-            <a href="https://www.linkedin.com/in/alan-wijaya-9880603a8/" target="_blank" className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
+            <a href="https://www.linkedin.com/in/alan-wijaya-9880603a8/" target="_blank" className="footer-link">
               [ LINKEDIN ]
             </a>
           </nav>

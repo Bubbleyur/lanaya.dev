@@ -80,15 +80,8 @@ const Navbar = () => {
             onClick={() => navigate("/")} 
             className="flex items-center gap-3 z-10 hover:opacity-80 transition-opacity cursor-pointer"
           >
-            <div 
-              className="w-2 h-2 rounded-full animate-pulse transition-all duration-300" 
-              style={{ 
-                backgroundColor: currentPalette.tint,
-                boxShadow: `0 0 10px ${currentPalette.tint}`
-              }} 
-            />
             <span className="font-mono text-white font-bold tracking-[0.25em] text-sm md:text-base">
-              ALAN_OS<span style={{ color: currentPalette.tint }} className="transition-colors duration-300">.v1</span>
+              ALAN<span style={{ color: currentPalette.tint }} className="transition-colors duration-300">.DEV</span>
             </span>
           </div>
 
@@ -114,7 +107,7 @@ const Navbar = () => {
               /blog
             </button>
             <button 
-              onClick={() => navigate("/shop")} 
+              onClick={() => navigate("/ventures")} 
               className="hover:text-white transition-colors cursor-pointer"
             >
               /ventures

@@ -43,24 +43,24 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-800 bg-stone-900/50" style={{ borderColor: `${currentPalette.tint}22` }}>
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: currentPalette.tint }} />
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-stone-500">System initialization complete</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-stone-300">PORTFOLIO v1.0.3</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1]" style={{ color: currentPalette.tint }}>
                   {/* @ts-ignore */}
                   <TextType 
-                    text={["BUILDING", "CODING", "SOLVING"]}
+                    text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
                     typingSpeed={100}
                     pauseDuration={2000}
                     showCursor
                     cursorCharacter="_"
                   />
                   <br />
-                  <span className="text-white">FUTURE.SYS</span>
+                  <span className="text-white">ALAN.DEV</span>
                 </h1>
               </div>
 
-              <p className="text-lg md:text-xl text-stone-400 max-w-xl font-mono leading-relaxed">
+              <p className="text-lg md:text-xl text-stone-200 font-md max-w-xl font-mono leading-relaxed bg-black/20 backdrop-blur-sm border border-white p-2">
                 <span style={{ color: currentPalette.tint }}>{`>`}</span> a junior developer dedicated to crafting seamless digital ecosystems and robust architecture.
               </p>
 
@@ -73,25 +73,25 @@ export default function Home() {
                     color: currentPalette.background 
                   }}
                 >
-                  Retrieve Projects
+                  View Case Studies
                 </button>
                 <button 
-                  className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800"
+                  className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-500/20 backdrop-blur-md"
                   style={{ 
                     borderColor: `${currentPalette.tint}44`,
                     color: currentPalette.tint
                   }}
                 >
-                  Contact Admin
+                  Get In Touch
                 </button>
               </div>
             </div>
 
             <div className="w-full md:w-80 space-y-4">
               <div className="p-6 border bg-stone-900/40 backdrop-blur-sm space-y-4" style={{ borderColor: `${currentPalette.tint}11` }}>
-                <div className="flex justify-between items-center text-[10px] text-stone-600 uppercase tracking-widest">
-                  <span>Connection</span>
-                  <span className="text-green-500">Encrypted</span>
+                <div className="flex justify-between items-center text-[10px] text-stone-300 uppercase tracking-widest">
+                  <span>Availability</span>
+                  <span className="text-green-500">Open for Work</span>
                 </div>
                 <div className="space-y-2">
                   <div className="h-1 w-full bg-stone-800">
@@ -101,8 +101,8 @@ export default function Home() {
                     <div className="h-full bg-stone-600 w-1/2" style={{ backgroundColor: currentPalette.tint }} />
                   </div>
                 </div>
-                <p className="text-[10px] font-mono text-stone-500">
-                  METRICS: CPU_STABLE // RAM_OPTIMIZED // DISK_SYNCED
+                <p className="text-[10px] font-mono text-stone-200/50">
+                  REACT // NEXT.JS // TYPESCRIPT // NODE.JS
                 </p>
               </div>
             </div>

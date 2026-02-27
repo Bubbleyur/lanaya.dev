@@ -3,7 +3,7 @@
 import React from "react";
 import { usePalette } from "@/context/PaletteContext";
 import TerminalSection from "@/components/ui/TerminalSection";
-import { Trophy, Code, Mail, Github, Linkedin, Globe, MessageSquare } from "lucide-react";
+import { Trophy, Code, Mail, Github, Linkedin, Globe, MessageSquare, Atom, Wind, Zap, Box, FileCode, Server, Terminal, Database, Cloud, GitBranch, Package, Triangle, Cpu } from "lucide-react";
 import { AboutCard } from "@/components/ui/AboutCard";
 
 export default function About() {
@@ -23,9 +23,36 @@ export default function About() {
   ];
 
   const techStack = [
-    { category: "Frontend", skills: ["React", "Next.js", "Tailwind CSS", "GSAP", "Three.js", "Jinja2"] },
-    { category: "Backend", skills: ["Node.js", "Python", "PostgreSQL", "Cloudflare Workers"] },
-    { category: "Tools", skills: ["Git", "Docker", "Github", "Vercel", "Linux"] }
+    { 
+      category: "Frontend", 
+      skills: [
+        { name: "React", icon: <Atom size={12} /> },
+        { name: "Next.js", icon: <Globe size={12} /> },
+        { name: "Tailwind CSS", icon: <Wind size={12} /> },
+        { name: "GSAP", icon: <Zap size={12} /> },
+        { name: "Three.js", icon: <Box size={12} /> },
+        { name: "Jinja2", icon: <FileCode size={12} /> }
+      ] 
+    },
+    { 
+      category: "Backend", 
+      skills: [
+        { name: "Node.js", icon: <Server size={12} /> },
+        { name: "Python", icon: <Terminal size={12} /> },
+        { name: "PostgreSQL", icon: <Database size={12} /> },
+        { name: "Cloudflare Workers", icon: <Cloud size={12} /> }
+      ] 
+    },
+    { 
+      category: "Tools", 
+      skills: [
+        { name: "Git", icon: <GitBranch size={12} /> },
+        { name: "Docker", icon: <Package size={12} /> },
+        { name: "Github", icon: <Github size={12} /> },
+        { name: "Vercel", icon: <Triangle size={12} /> },
+        { name: "Linux", icon: <Cpu size={12} /> }
+      ] 
+    }
   ];
 
   const contacts = [
@@ -88,19 +115,53 @@ export default function About() {
 
       {/* ACHIEVEMENTS */}
       <TerminalSection id="achievements" className="py-24 px-6 md:px-12 border-t border-stone-900">
-        <div className="mb-12">
+        <div className="mb-16">
           <span className="text-xs uppercase tracking-[0.5em] opacity-40 mb-2 block">Terminal_Achievements</span>
           <h2 className="text-4xl font-bold text-white">Awards & <span style={{ color: currentPalette.tint }}>Milestones</span></h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {achievements.map((item, i) => (
-            <div key={i} className="p-8 border bg-stone-900/40 relative group hover:bg-stone-900/60 transition-all duration-300" style={{ borderColor: `${currentPalette.tint}22` }}>
-              <div className="absolute top-4 right-4 text-stone-700 font-mono text-xs">{item.date}</div>
-              <Trophy size={32} className="mb-6 opacity-40 group-hover:opacity-100 transition-opacity" style={{ color: currentPalette.tint }} />
-              <h4 className="text-xl font-bold text-white mb-2 uppercase tracking-tight">{item.title}</h4>
-              <p className="text-stone-500 text-sm font-mono leading-relaxed">{item.description}</p>
-            </div>
-          ))}
+
+        <div className="relative max-w-4xl">
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-stone-800 -translate-x-1/2">
+            <div className="absolute top-0 left-0 w-full h-full animate-pulse opacity-20" style={{ backgroundColor: currentPalette.tint }} />
+          </div>
+
+          <div className="space-y-12">
+            {achievements.map((item, i) => (
+              <div key={i} className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                {/* Timeline Dot */}
+                <div 
+                  className="absolute left-4 md:left-1/2 w-3 h-3 border rotate-45 -translate-x-1/2 z-10 bg-black"
+                  style={{ borderColor: currentPalette.tint }}
+                >
+                  <div className="absolute inset-0.5 animate-pulse" style={{ backgroundColor: currentPalette.tint }} />
+                </div>
+
+                {/* Content Card */}
+                <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                  <div 
+                    className="p-6 border bg-stone-900/40 hover:bg-stone-900/60 transition-all duration-300 group relative"
+                    style={{ borderColor: `${currentPalette.tint}22` }}
+                  >
+                    {/* Corner accents */}
+                    <div className="absolute top-0 left-0 w-1 h-1" style={{ backgroundColor: currentPalette.tint }} />
+                    <div className="absolute bottom-0 right-0 w-1 h-1" style={{ backgroundColor: currentPalette.tint }} />
+
+                    <div className={`text-xs text-stone-200 font-mono mb-2 opacity-40 uppercase tracking-widest ${i % 2 === 0 ? 'md:text-right text-left' : 'text-left'}`}>{item.date}</div>
+                    <h4 className={`text-xl font-bold text-white mb-2 uppercase tracking-tight flex items-center gap-3 ${i % 2 === 0 ? 'md:justify-end flex-row' : 'justify-start flex-row'}`}>
+                      {i % 2 !== 0 && <Trophy size={18} style={{ color: currentPalette.tint }} className="opacity-40 group-hover:opacity-100 transition-opacity" />}
+                      {item.title}
+                      {i % 2 === 0 && <Trophy size={18} style={{ color: currentPalette.tint }} className="opacity-40 group-hover:opacity-100 transition-opacity" />}
+                    </h4>
+                    <p className={`text-stone-500 text-sm font-mono leading-relaxed ${i % 2 === 0 ? 'md:text-right text-left' : 'text-left'}`}>{item.description}</p>
+                  </div>
+                </div>
+
+                {/* Spacer for PC layout */}
+                <div className="hidden md:block w-[45%]" />
+              </div>
+            ))}
+          </div>
         </div>
       </TerminalSection>
 
@@ -122,10 +183,13 @@ export default function About() {
                 {stack.skills.map((skill, j) => (
                   <span 
                     key={j} 
-                    className="px-4 py-2 border text-[10px] font-mono tracking-widest uppercase transition-colors hover:bg-stone-800 cursor-default"
+                    className="px-4 py-2 border text-[10px] font-mono tracking-widest uppercase transition-colors hover:bg-stone-800 cursor-default flex items-center gap-2 group/skill"
                     style={{ borderColor: `${currentPalette.tint}22`, color: currentPalette.tint }}
                   >
-                    {skill}
+                    <span className="opacity-50 group-hover/skill:opacity-100 transition-opacity">
+                      {skill.icon}
+                    </span>
+                    {skill.name}
                   </span>
                 ))}
               </div>
