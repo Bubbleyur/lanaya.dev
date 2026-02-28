@@ -65,7 +65,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <button 
+                <a href="/projects"
                   className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-[1.02] active:scale-95"
                   style={{ 
                     backgroundColor: currentPalette.tint, 
@@ -73,9 +73,9 @@ export default function Home() {
                     color: currentPalette.background 
                   }}
                 >
-                  View Case Studies
-                </button>
-                <button 
+                  See Doings
+                </a>
+                <a href="/about"
                   className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-500/20 backdrop-blur-md"
                   style={{ 
                     borderColor: `${currentPalette.tint}44`,
@@ -83,7 +83,7 @@ export default function Home() {
                   }}
                 >
                   Get In Touch
-                </button>
+                </a>
               </div>
             </div>
 

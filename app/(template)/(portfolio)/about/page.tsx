@@ -56,7 +56,7 @@ export default function About() {
   ];
 
   const contacts = [
-    { label: "Email", value: "contact@alanwijayaok14@gmail.com", icon: <Mail size={18} />, link: "mailto:contact@alanwijayaok14@gmail.com" },
+    { label: "Email", value: "alanwijayaok14@gmail.com", icon: <Mail size={18} />, link: "mailto:contact@alanwijayaok14@gmail.com" },
     { label: "GitHub", value: "github.com/bubbleyur", icon: <Github size={18} />, link: "https://github.com/bubbleyur" },
     { label: "LinkedIn", value: "linkedin.com/in/alan", icon: <Linkedin size={18} />, link: "https://www.linkedin.com/in/alan-wijaya-9880603a8/" },
     { label: "Discord", value: "@bubbleyur", icon: <MessageSquare size={18} />, link: "https://discord.com/users/632142872577048577" }
