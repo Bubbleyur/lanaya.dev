@@ -1,4 +1,4 @@
-export const MAIN_WEBSITE_URL = "https://lanaya.dev";
+export const MAIN_WEBSITE_URL = "https://alanverse.my.id";
 export const CLOUDINARY_CLOUD_NAME = "drrleg8t2";
 
 export interface VentureItem {
@@ -21,7 +21,7 @@ export const venturesData: VentureItem[] = [
     status: "LIVE",
     date: "2026",
     tags: ["Python", "Jinja2", "Flask", "PostgreSQL"],
-    link: "vonbake.my.id"
+    link: "https://vonbake.my.id"
   },
   {
     title: "My Game Item Shop!",
