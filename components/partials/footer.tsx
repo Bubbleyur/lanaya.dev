@@ -57,12 +57,12 @@ const Footer = () => {
             © 2026 ALAN's PORTOFOLIO
           </p>
           <p className="text-[9px] footer-text-secondary">
-            ALL RIGHTS RESERVED.
+            ALL RIGHTS RESERVED. MIT LICENSE.
           </p>
         </div>
 
         <div className="flex items-center gap-8">
-          <div className="hidden md:block opacity-30 italic">
+          <div className="hidden md:block opacity-70 italic">
             Surabaya — GMT+7
           </div>
           
@@ -75,7 +75,7 @@ const Footer = () => {
             </a>
           </nav>
           
-          <div className="hidden lg:block opacity-30 uppercase">
+          <div className="hidden lg:block opacity-70 uppercase">
             Iterate • Break • Rebuild
           </div>
         </div>

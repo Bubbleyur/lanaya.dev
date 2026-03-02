@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>ALAN VERSE</h1>
+  <p>🔥 A personal website built from scratch using Next.js, TypeScript, Tailwind CSS, Radix, Lenis, and Neon Postgres</p>
+</div>
 
-## Getting Started
+<br />
 
-First, run the development server:
+[![Portfolio screenshot](./.github/assets/screenshot.png)](https://alanverse.my.id)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div align="center">
+  <a href="https://hexaa.sh" target="_blank">alanverse.my.id</a>
+  &nbsp;
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Introduction
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Building Alanverse was quite a ride. This is actually my 4th attempt at a portfolio! My earlier versions often hit a dead end because I was constantly obsessing over finding the perfect balance between high-end UI/UX and solid performance. But those "failed" attempts were actually my best teachers—they pushed me to stop settling and start building a real, mature ecosystem that I'm finally proud to share.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+What really gets me excited about this project is the "magic" of integration. There’s something deeply satisfying about taking raw data from APIs and Databases (like Neon Postgres), and turning that complexity into a smooth, interactive interface. To me, it’s like solving a giant puzzle where the final piece is a living, breathing digital product that looks as good as it functions.
 
-## Learn More
+More than just a showcase, I want Alanverse to be a window into how I think. If you’re a recruiter or a client, I want you to see exactly how I approach Software Architecture. It’s not just about making things "pretty"—it's about building clean, scalable, and efficient systems that are ready for the real world. Welcome to my digital space!
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js 16
+- React 19
+- Typescript 5
+- TailwindCSS 3
+- Lenis 1
+- Gray Matter 4
+- GSAP 3
+- Lucide Icon & React Icons Pack
+- Radix UI 1
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 License
 
-## Deploy on Vercel
+This project is licensed under the **MIT License**. You are free to use it, but please keep the original attribution.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Copyright (c) 2026 Alan ([alanverse.my.id](https://alanverse.my.id))

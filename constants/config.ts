@@ -14,7 +14,7 @@ export interface VentureItem {
 
 export const venturesData: VentureItem[] = [
   {
-    title: "VONBAKE.MY.ID",
+    title: "VONBAKE",
     description: "Transforming a home-based bakery into a digital-first brand with real-time order tracking and customer behavior analytics.",
     type: "BRANDING",
     imageId: "https://res.cloudinary.com/drrleg8t2/image/upload/v1772252724/www.vonbake.my.id__kki5fc.png",
