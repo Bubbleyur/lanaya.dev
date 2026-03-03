@@ -124,7 +124,7 @@ export default function ProjectsPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
                   href="mailto:contact@alanwijayaok14@gmail.com"
-                  className="group relative px-8 py-4 overflow-hidden bg-white text-black font-bold uppercase tracking-widest text-xs transition-all hover:pr-12"
+                  className="cursor-target group relative px-8 py-4 overflow-hidden bg-white text-black font-bold uppercase tracking-widest text-xs transition-all hover:pr-12"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     <Mail size={14} />
@@ -138,7 +138,7 @@ export default function ProjectsPage() {
 
                 <Link 
                   href="/ventures"
-                  className="group px-8 py-4 border border-stone-800 hover:bg-stone-900 transition-all font-bold uppercase tracking-widest text-xs flex items-center gap-2"
+                  className="cursor-target group px-8 py-4 border border-stone-800 hover:bg-stone-900 transition-all font-bold uppercase tracking-widest text-xs flex items-center gap-2"
                   style={{ color: currentPalette.tint, borderColor: `${currentPalette.tint}33` }}
                 >
                   <Rocket size={14} />

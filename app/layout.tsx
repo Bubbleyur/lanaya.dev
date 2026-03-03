@@ -22,6 +22,7 @@ import { PaletteProvider } from "@/context/PaletteContext";
 import { TransitionProvider } from "@/components/ui/TransitionProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
+import TargetCursor from "@/components/ui/TargetCursor";
 
 export default function RootLayout({
   children,
@@ -37,6 +38,12 @@ export default function RootLayout({
         <PaletteProvider>
           <TransitionProvider>
             <SmoothScrollProvider>
+              <TargetCursor 
+                  spinDuration={0}
+                  hideDefaultCursor
+                  parallaxOn
+                  hoverDuration={0.2}
+                />
               <MainLayout>
                 {children}
               </MainLayout>

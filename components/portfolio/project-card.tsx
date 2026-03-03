@@ -58,7 +58,7 @@ export function ProjectCard({
   return (
     <div
       className={cn(
-        "group relative overflow-hidden border bg-stone-900/40 backdrop-blur-sm transition-all duration-500 hover:bg-stone-900/60",
+        "cursor-target group relative overflow-hidden border bg-stone-900/40 backdrop-blur-sm transition-all duration-500 hover:bg-stone-900/60",
         classNames?.container,
       )}
       style={{ borderColor: `${currentPalette.tint}22` }}

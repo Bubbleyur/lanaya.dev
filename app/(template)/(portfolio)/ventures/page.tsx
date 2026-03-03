@@ -43,7 +43,7 @@ export default function VenturesPage() {
           <div className="flex flex-wrap gap-4 pt-6 justify-center md:justify-start">
             <Link 
               href={MAIN_WEBSITE_URL}
-              className="group relative px-6 py-3 border border-stone-800 bg-stone-900/50 hover:bg-stone-900 transition-all font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-2"
+              className="cursor-target group relative px-6 py-3 border border-stone-800 bg-stone-900/50 hover:bg-stone-900 transition-all font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-2"
               style={{ color: currentPalette.tint, borderColor: `${currentPalette.tint}44` }}
             >
               <Globe size={14} />
@@ -72,7 +72,7 @@ export default function VenturesPage() {
                 venture={venture}
                 priority={idx < 2}
                 classNames={{
-                  container: "group/card h-full flex flex-col hover:border-tint/30 transition-colors duration-500",
+                  container: "cursor-target group/card h-full flex flex-col hover:border-tint/30 transition-colors duration-500",
                 }}
               />
             ))}
@@ -98,7 +98,7 @@ export default function VenturesPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
                   href="mailto:contact@alanwijayaok14@gmail.com"
-                  className="group relative px-8 py-4 overflow-hidden bg-white text-black font-bold uppercase tracking-widest text-xs transition-all hover:pr-12"
+                  className="cursor-target group relative px-8 py-4 overflow-hidden bg-white text-black font-bold uppercase tracking-widest text-xs transition-all hover:pr-12"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     <Mail size={14} />
@@ -112,7 +112,7 @@ export default function VenturesPage() {
 
                 <Link 
                   href={MAIN_WEBSITE_URL}
-                  className="group px-8 py-4 border border-stone-800 hover:bg-stone-900 transition-all font-bold uppercase tracking-widest text-xs flex items-center gap-2"
+                  className="cursor-target group px-8 py-4 border border-stone-800 hover:bg-stone-900 transition-all font-bold uppercase tracking-widest text-xs flex items-center gap-2"
                   style={{ color: currentPalette.tint, borderColor: `${currentPalette.tint}33` }}
                 >
                   <Globe size={14} />

@@ -43,17 +43,17 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-800 bg-stone-900/50" style={{ borderColor: `${currentPalette.tint}22` }}>
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: currentPalette.tint }} />
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-stone-300">PORTFOLIO v1.0.3</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-stone-300">PORTFOLIO v0.1.2</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1]" style={{ color: currentPalette.tint }}>
                   {/* @ts-ignore */}
                   <TextType 
-                    text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
-                    typingSpeed={100}
-                    pauseDuration={2000}
-                    showCursor
-                    cursorCharacter="_"
+                  text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
+                  typingSpeed={100}
+                  pauseDuration={2000}
+                  showCursor
+                  cursorCharacter="_"
                   />
                   <br />
                   <span className="text-white">ALAN.DEV</span>
@@ -66,7 +66,7 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-4 pt-4">
                 <a href="/projects"
-                  className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                  className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-[1.02] active:scale-95"
                   style={{ 
                     backgroundColor: currentPalette.tint, 
                     borderColor: currentPalette.tint,
@@ -76,7 +76,7 @@ export default function Home() {
                   See Doings
                 </a>
                 <a href="/about"
-                  className="px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-500/20 backdrop-blur-md"
+                  className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-500/20 backdrop-blur-md"
                   style={{ 
                     borderColor: `${currentPalette.tint}44`,
                     color: currentPalette.tint
@@ -114,7 +114,7 @@ export default function Home() {
       <TerminalSection id="about" className="py-24">
         <div className="w-full max-w-5xl px-4">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
-            <div className="space-y-6 flex-row justify-items-center">
+            <div className="cursor-target space-y-6 flex-row justify-items-center">
               {/* Profile Image with Terminal Frame */}
               <div className="relative w-32 h-32 md:w-50 md:h-50 group">
                 <div 
@@ -147,7 +147,7 @@ export default function Home() {
             </div>
 
             <div 
-              className="max-w-xl p-8 border bg-stone-900/40 backdrop-blur-md relative"
+              className="cursor-target max-w-xl p-8 border bg-stone-900/40 backdrop-blur-md relative"
               style={{ borderColor: `${currentPalette.tint}33` }}
             >
               <div 

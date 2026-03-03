@@ -78,7 +78,7 @@ export default function About() {
       <TerminalSection id="bio" className="py-24 px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div 
-            className="aspect-video border-2 flex items-center justify-center p-12 text-center bg-stone-900/20 backdrop-blur-sm relative overflow-hidden group"
+            className="cursor-target aspect-video border-2 flex items-center justify-center p-12 text-center bg-stone-900/20 backdrop-blur-sm relative overflow-hidden group"
             style={{ borderColor: `${currentPalette.tint}22` }}
           >
             <div className="absolute top-2 left-2 flex gap-1.5">
@@ -94,9 +94,9 @@ export default function About() {
             <div className="absolute bottom-0 right-0 w-8 h-8 opacity-20" style={{ background: `linear-gradient(135deg, transparent 50%, ${currentPalette.tint} 50%)` }} />
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 cursor-target">
             <h3 className="text-2xl font-bold text-white uppercase tracking-tighter" style={{ color: currentPalette.tint }}>
-              You’ve found Alan.
+              You’ve found Alan
             </h3>
             <div className="space-y-4 text-stone-400 font-mono leading-relaxed">
               <p>
@@ -138,7 +138,7 @@ export default function About() {
                 </div>
 
                 {/* Content Card */}
-                <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                <div className={`cursor-target w-full md:w-[45%] pl-12 md:pl-0 ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                   <div 
                     className="p-6 border bg-stone-900/40 hover:bg-stone-900/60 transition-all duration-300 group relative"
                     style={{ borderColor: `${currentPalette.tint}22` }}
@@ -183,7 +183,7 @@ export default function About() {
                 {stack.skills.map((skill, j) => (
                   <span 
                     key={j} 
-                    className="px-4 py-2 border text-[10px] font-mono tracking-widest uppercase transition-colors hover:bg-stone-800 cursor-default flex items-center gap-2 group/skill"
+                    className="cursor-target px-4 py-2 border text-[10px] font-mono tracking-widest uppercase transition-colors hover:bg-stone-800 cursor-default flex items-center gap-2 group/skill"
                     style={{ borderColor: `${currentPalette.tint}22`, color: currentPalette.tint }}
                   >
                     <span className="opacity-50 group-hover/skill:opacity-100 transition-opacity">
@@ -224,7 +224,7 @@ export default function About() {
                   key={i} 
                   href={contact.link}
                   target="_blank"
-                  className="flex items-center justify-between p-4 border bg-stone-900/20 group hover:bg-stone-900/50 transition-all duration-300"
+                  className="cursor-target flex items-center justify-between p-4 border bg-stone-900/20 group hover:bg-stone-900/50 transition-all duration-300"
                   style={{ borderColor: `${currentPalette.tint}11` }}
                 >
                   <div className="flex items-center gap-4">

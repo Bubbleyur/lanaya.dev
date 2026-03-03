@@ -54,56 +54,87 @@ export const LanyardCard = () => {
   const [currentProgress, setCurrentProgress] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-        const json = await response.json();
-        setData(json);
-      } catch (error) {
-        console.error("Lanyard error:", error);
-      } finally {
+    const socket = new WebSocket("wss://api.lanyard.rest/socket");
+
+    socket.onopen = () => {
+      socket.send(JSON.stringify({
+        op: 2,
+        d: {
+          subscribe_to_id: DISCORD_ID
+        }
+      }));
+    };
+
+    socket.onmessage = (event) => {
+      const payload = JSON.parse(event.data);
+
+      // INIT_STATE = pertama kali connect
+      // PRESENCE_UPDATE = setiap ada perubahan
+      if (payload.t === "INIT_STATE" || payload.t === "PRESENCE_UPDATE") {
+        setData({ data: payload.d });
         setLoading(false);
       }
     };
 
-    fetchData();
-    const interval = setInterval(fetchData, 30000); // Update every 30s
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
-    const LASTFM_USERNAME = process.env.NEXT_PUBLIC_LASTFM_USERNAME;
-    
-    if (!LASTFM_API_KEY || !LASTFM_USERNAME) return;
-
-    const fetchLastfm = async () => {
-      try {
-        const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&limit=1`);
-        const json = await res.json();
-        const track = json.recenttracks.track[0];
-        if (track && track['@attr'] && track['@attr'].nowplaying === 'true') {
-          setLastfmData({ 
-            song: track.name, 
-            artist: track.artist['#text'] 
-          });
-        } else {
-          setLastfmData(null);
-        }
-      } catch (e) {
-        console.error("Last.fm error", e);
-      }
+    socket.onerror = (err) => {
+      console.error("WebSocket error:", err);
     };
 
-    fetchLastfm();
-    const interval = setInterval(fetchLastfm, 10000);
-    return () => clearInterval(interval);
+    socket.onclose = () => {
+      console.log("Lanyard socket closed");
+    };
+
+    return () => {
+      socket.close();
+    };
   }, []);
 
   const lanyardSpotify = data?.data?.spotify;
   const lanyardListening = data?.data?.listening_to_spotify;
 
-  const currentSong = lastfmData || (lanyardListening && lanyardSpotify ? { song: lanyardSpotify.song, artist: lanyardSpotify.artist } : null);
+  useEffect(() => {
+  if (lanyardListening) return;
+
+  if (lanyardListening) {
+    setLastfmData(null);
+  }
+
+  const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
+  const LASTFM_USERNAME = process.env.NEXT_PUBLIC_LASTFM_USERNAME;
+  
+  if (!LASTFM_API_KEY || !LASTFM_USERNAME) return;
+
+  const fetchLastfm = async () => {
+    try {
+      const res = await fetch(
+        `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&limit=1`
+      );
+      const json = await res.json();
+      const track = json.recenttracks.track[0];
+
+      if (track && track['@attr']?.nowplaying === 'true') {
+        setLastfmData({ 
+          song: track.name, 
+          artist: track.artist['#text'] 
+        });
+      } else {
+        setLastfmData(null);
+      }
+    } catch (e) {
+      console.error("Last.fm error", e);
+    }
+  };
+
+  fetchLastfm();
+  const interval = setInterval(fetchLastfm, 10000);
+  return () => clearInterval(interval);
+}, [lanyardListening]);
+
+  const spotifyFromLanyard =
+  lanyardListening && lanyardSpotify
+    ? { song: lanyardSpotify.song, artist: lanyardSpotify.artist }
+    : null;
+  const currentSong = spotifyFromLanyard || lastfmData;
   const isListening = !!currentSong;
 
   // Track progress in real-time

@@ -30,7 +30,7 @@ export default async function BlogPage() {
                 <Link 
                   key={post.slug} 
                   href={`/blog/${post.slug}`}
-                  className="group block p-8 border border-stone-800 bg-stone-900/20 backdrop-blur-sm transition-all duration-300 hover:bg-stone-900/40 relative"
+                  className="cursor-target group block p-8 border border-stone-800 bg-stone-900/20 backdrop-blur-sm transition-all duration-300 hover:bg-stone-900/40 relative"
                 >
                   <div className="space-y-4">
                     <div className="flex flex-wrap items-center gap-6 text-[10px] uppercase tracking-widest text-stone-500 font-mono">
