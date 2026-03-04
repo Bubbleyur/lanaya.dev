@@ -50,11 +50,11 @@ export default function Home() {
                   {/* @ts-ignore */}
                   <div className="cursor-target inline-block hover:bg-black/80 hover:backdrop-blur-sm duration-400">
                     <TextType
-                    text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
-                    typingSpeed={80}
-                    pauseDuration={3000}
-                    showCursor
-                    cursorCharacter="_"
+                      text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
+                      typingSpeed={80}
+                      pauseDuration={3000}
+                      showCursor
+                      cursorCharacter="_" variableSpeed={undefined} onSentenceComplete={undefined}
                     />
                   </div>
                   <br ></br>
