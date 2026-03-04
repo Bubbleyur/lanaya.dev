@@ -93,10 +93,9 @@ export const LanyardCard = () => {
   const lanyardListening = data?.data?.listening_to_spotify;
 
   useEffect(() => {
-  if (lanyardListening) return;
-
   if (lanyardListening) {
     setLastfmData(null);
+    return;
   }
 
   const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
@@ -153,7 +152,7 @@ export const LanyardCard = () => {
     updateProgress();
     const interval = setInterval(updateProgress, 100); // 100ms for responsiveness
     return () => clearInterval(interval);
-  }, [lanyardListening, lanyardSpotify?.timestamps.start]);
+  }, [lanyardListening, lanyardSpotify?.timestamps.start, lanyardSpotify?.song]);
 
   const parseLRC = (lrc: string): LRCLine[] => {
     const lines = lrc.split('\n');
@@ -231,7 +230,7 @@ export const LanyardCard = () => {
 
   return (
     <div 
-      className="p-6 border bg-black/40 backdrop-blur-sm group transition-all duration-300 hover:bg-black/60"
+      className="cursor-target p-6 border bg-black/40 backdrop-blur-sm group transition-all duration-300 hover:bg-black/60"
       style={{ borderColor: `${currentPalette.tint}33` }}
     >
       <div className="flex items-start gap-5">

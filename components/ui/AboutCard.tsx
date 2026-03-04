@@ -15,7 +15,7 @@ export const AboutCard = ({ title, description, icon, className = "" }: AboutCar
 
   return (
     <div 
-      className={`group p-6 border bg-black/40 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 ${className}`}
+      className={`cursor-target group p-6 border bg-black/40 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 ${className}`}
       style={{ borderColor: `${currentPalette.tint}33` }}
     >
       <div className="flex flex-col gap-4">

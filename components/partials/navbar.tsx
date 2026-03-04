@@ -78,7 +78,7 @@ const Navbar = () => {
           {/* LEFT: Identity */}
           <div 
             onClick={() => navigate("/")} 
-            className="cursor-target flex items-center gap-3 z-10 hover:opacity-80 transition-opacity cursor-pointer"
+            className="cursor-target flex items-center gap-3 z-10 hover:opacity-80 transition-opacity"
           >
             <span className="font-mono text-white font-bold tracking-[0.25em] text-sm md:text-base">
               ALAN<span style={{ color: currentPalette.tint }} className="transition-colors duration-300">.DEV</span>
@@ -89,26 +89,26 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-10 font-mono text-[11px] uppercase tracking-[0.4em] text-stone-500 z-10">
             <button 
               onClick={() => navigate("/about")} 
-              className="cursor-target hover:text-white transition-colors cursor-pointer" 
+              className="cursor-target hover:text-white transition-colors" 
               style={{ '--hover-color': currentPalette.tint } as any}
             >
               /about
             </button>
             <button 
               onClick={() => navigate("/projects")} 
-              className="cursor-target hover:text-white transition-colors cursor-pointer"
+              className="cursor-target hover:text-white transition-colors"
             >
               /projects
             </button>
             <button 
               onClick={() => navigate("/blog")} 
-              className="cursor-target hover:text-white transition-colors cursor-pointer"
+              className="cursor-target hover:text-white transition-colors"
             >
               /blog
             </button>
             <button 
               onClick={() => navigate("/ventures")} 
-              className="cursor-target hover:text-white transition-colors cursor-pointer"
+              className="cursor-target hover:text-white transition-colors"
             >
               /ventures
             </button>

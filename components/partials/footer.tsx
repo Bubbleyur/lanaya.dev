@@ -67,10 +67,10 @@ const Footer = () => {
           </div>
           
           <nav className="flex gap-6">
-            <a href="https://github.com/Bubbleyur" target="_blank" className="footer-link">
+            <a href="https://github.com/Bubbleyur" target="_blank" className="cursor-target footer-link">
               [ GITHUB ]
             </a>
-            <a href="https://www.linkedin.com/in/alan-wijaya-9880603a8/" target="_blank" className="footer-link">
+            <a href="https://www.linkedin.com/in/alan-wijaya-9880603a8/" target="_blank" className="cursor-target footer-link">
               [ LINKEDIN ]
             </a>
           </nav>

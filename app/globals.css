@@ -201,3 +201,7 @@
     animation: vertical-scroll 40s linear infinite;
   }
 }
+
+html, body {
+  cursor: none;
+}

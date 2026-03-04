@@ -46,21 +46,23 @@ export default function Home() {
                   <span className="text-[10px] uppercase tracking-[0.3em] text-stone-300">PORTFOLIO v0.1.2</span>
                 </div>
                 
-                <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1]" style={{ color: currentPalette.tint }}>
+                <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1] mix-blend-exclusion" style={{ color: `${currentPalette.tint}dd`, textShadow: `0 0 20px ${currentPalette.tint}` }}>
                   {/* @ts-ignore */}
-                  <TextType 
-                  text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
-                  typingSpeed={100}
-                  pauseDuration={2000}
-                  showCursor
-                  cursorCharacter="_"
-                  />
-                  <br />
+                  <div className="cursor-target inline-block hover:bg-black/80 hover:backdrop-blur-sm duration-400">
+                    <TextType
+                    text={["INNOVATING", "ARCHITECTING", "DEVELOPING"]}
+                    typingSpeed={80}
+                    pauseDuration={3000}
+                    showCursor
+                    cursorCharacter="_"
+                    />
+                  </div>
+                  <br ></br>
                   <span className="text-white">ALAN.DEV</span>
                 </h1>
               </div>
 
-              <p className="text-lg md:text-xl text-stone-200 font-md max-w-xl font-mono leading-relaxed bg-black/20 backdrop-blur-sm border border-white p-2">
+              <p className="text-lg md:text-xl text-stone-200 font-md max-w-xl font-mono leading-relaxed bg-black/60 backdrop-blur-sm border border-white p-2">
                 <span style={{ color: currentPalette.tint }}>{`>`}</span> a junior developer dedicated to crafting seamless digital ecosystems and robust architecture.
               </p>
 
@@ -76,7 +78,7 @@ export default function Home() {
                   See Doings
                 </a>
                 <a href="/about"
-                  className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-500/20 backdrop-blur-md"
+                  className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-700/80 backdrop-blur-md"
                   style={{ 
                     borderColor: `${currentPalette.tint}44`,
                     color: currentPalette.tint
@@ -88,22 +90,66 @@ export default function Home() {
             </div>
 
             <div className="w-full md:w-80 space-y-4">
-              <div className="p-6 border bg-stone-900/40 backdrop-blur-sm space-y-4" style={{ borderColor: `${currentPalette.tint}11` }}>
-                <div className="flex justify-between items-center text-[10px] text-stone-300 uppercase tracking-widest">
-                  <span>Availability</span>
-                  <span className="text-green-500">Open for Work</span>
+              <div 
+                className="p-6 border bg-black/60 backdrop-blur-sm space-y-5 font-mono text-[11px]"
+                style={{ borderColor: `${currentPalette.tint}22` }}
+              >
+                {/* Header */}
+                <div className="flex justify-between items-center uppercase tracking-widest text-stone-400">
+                  <span>System Status</span>
+                  <span style={{ color: currentPalette.tint }}>ONLINE</span>
                 </div>
-                <div className="space-y-2">
-                  <div className="h-1 w-full bg-stone-800">
-                    <div className="h-full bg-stone-600 w-3/4" style={{ backgroundColor: currentPalette.tint }} />
+
+                {/* Divider */}
+                <div className="h-px bg-stone-800" />
+
+                {/* Info Rows */}
+                <div className="space-y-2 text-stone-300">
+                  <div className="flex justify-between">
+                    <span className="opacity-60">Availability</span>
+                    <span style={{ color: currentPalette.tint }}>Open for Work</span>
                   </div>
-                  <div className="h-1 w-full bg-stone-800">
-                    <div className="h-full bg-stone-600 w-1/2" style={{ backgroundColor: currentPalette.tint }} />
+
+                  <div className="flex justify-between">
+                    <span className="opacity-60">Stack</span>
+                    <span>Next.js / TS / Node</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span className="opacity-60">Architecture</span>
+                    <span>Modular</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span className="opacity-60">Deployment</span>
+                    <span>Vercel</span>
                   </div>
                 </div>
-                <p className="text-[10px] font-mono text-stone-200/50">
-                  REACT // NEXT.JS // TYPESCRIPT // NODE.JS
-                </p>
+
+                {/* Skill Bars */}
+                <div className="space-y-3 pt-2">
+                  {[
+                    { label: "Frontend", value: 60 },
+                    { label: "Backend", value: 70 },
+                    { label: "System Design", value: 75 }
+                  ].map((skill) => (
+                    <div key={skill.label}>
+                      <div className="flex justify-between text-[10px] mb-1">
+                        <span className="text-stone-300">{skill.label}</span>
+                        <span>{skill.value}%</span>
+                      </div>
+                      <div className="h-1 w-full bg-stone-800">
+                        <div
+                          className="h-full transition-all duration-500"
+                          style={{
+                            width: `${skill.value}%`,
+                            backgroundColor: currentPalette.tint
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -116,7 +162,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
             <div className="cursor-target space-y-6 flex-row justify-items-center">
               {/* Profile Image with Terminal Frame */}
-              <div className="relative w-32 h-32 md:w-50 md:h-50 group">
+              <div className="cursor-target relative w-32 h-32 md:w-50 md:h-50 group">
                 <div 
                   className="absolute inset-0 border-2 z-10 transition-transform duration-300 group-hover:scale-105"
                   style={{ borderColor: currentPalette.tint }}
@@ -140,14 +186,14 @@ export default function Home() {
 
               <div className="space-y-4">
                 <span className="text-xs uppercase tracking-[0.5em] opacity-40">System_Profile</span>
-                <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
-                  Who is <span style={{ color: currentPalette.tint }}>Alan</span>?
+                <h2 className="cursor-target text-4xl md:text-6xl font-bold text-white tracking-tighter hover:bg-black/30 hover:backdrop-blur-sm duration-400">
+                  Who is <span style={{ color: `${currentPalette.tint}ee`, textShadow: `0 0 20px ${currentPalette.tint}` }}>Alan</span>?
                 </h2>
               </div>
             </div>
 
             <div 
-              className="cursor-target max-w-xl p-8 border bg-stone-900/40 backdrop-blur-md relative"
+              className="max-w-xl p-8 border bg-stone-900/40 backdrop-blur-md relative"
               style={{ borderColor: `${currentPalette.tint}33` }}
             >
               <div 
