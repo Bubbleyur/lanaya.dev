@@ -19,23 +19,33 @@ export const metadata: Metadata = {
 };
 
 import { PaletteProvider } from "@/context/PaletteContext";
+import PaletteSync from "@/components/ui/PaletteSync";
 import { TransitionProvider } from "@/components/ui/TransitionProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import TargetCursor from "@/components/ui/TargetCursor";
 
-export default function RootLayout({
+import { cookies } from 'next/headers';
+import { palettes, defaultPalette } from '@/constants/palettes';
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // read palette id from cookie on server
+  const cookieStore = cookies();
+  const paletteId = cookieStore.get('app-palette')?.value || defaultPalette.id;
+  const palette = palettes.find(p => p.id === paletteId) ?? defaultPalette;
+
   return (
-    <html lang="en">
+    <html lang="en" style={{ '--tint': palette.tint } as React.CSSProperties}>
       <body
         className={`${bricolage.variable} ${workSans.variable} antialiased`}
         suppressHydrationWarning
       >
         <PaletteProvider>
+          <PaletteSync />
           <TransitionProvider>
             <SmoothScrollProvider>
               <TargetCursor 

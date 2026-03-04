@@ -4,6 +4,7 @@ import TextType from '@/components/typography/TextType';
 import { ProjectCard } from '@/components/portfolio/project-card';
 import TerminalSection from "@/components/ui/TerminalSection";
 import { projectsData, ProjectItem } from '@/constants/portfolio/project';
+import { getGithubProjects } from '@/lib/github';
 import { AboutCard } from "@/components/ui/AboutCard";
 import { LanyardCard } from "@/components/ui/LanyardCard";
 import { Brain, Quote } from "lucide-react";
@@ -17,6 +18,10 @@ export default async function Home() {
   } catch (e) {
     console.error('projects fetch failed', e);
   }
+
+  // also fetch github repos for use elsewhere (server rendered)
+  const githubProjects = await getGithubProjects();
+  console.log('githubProjects count', githubProjects.length);
 
   return (
     <>
@@ -236,6 +241,9 @@ export default async function Home() {
           </h1>
           <p className="text-base md:text-lg text-slate-100/60 max-w-2xl">
             Check out my curated projects and experiments.
+          </p>
+          <p className="text-sm text-slate-400 mt-2">
+            ({githubProjects.length} repos fetched from GitHub)
           </p>
         </div>
 
