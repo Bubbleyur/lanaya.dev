@@ -248,13 +248,13 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
-          {projects.length === 0 ? (
+          {githubProjects.length === 0 ? (
             <div className="col-span-full py-12 text-center font-mono opacity-50">
-              [ NO_PROJECTS_AVAILABLE ]
+              [ NO_REPOS_FOUND ]
             </div>
           ) : (
-            projects.slice(0, 4).map((project, idx) => ( // Show first 4 on home
-              <ProjectCard key={idx} project={project} priority={idx < 2} />
+            githubProjects.slice(0, 4).map((project, idx) => (
+              <ProjectCard key={idx} project={project as any} priority={idx < 2} />
             ))
           )}
         </div>
