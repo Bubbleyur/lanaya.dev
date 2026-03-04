@@ -34,7 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // read palette id from cookie on server
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const paletteId = cookieStore.get('app-palette')?.value || defaultPalette.id;
   const palette = palettes.find(p => p.id === paletteId) ?? defaultPalette;
 
