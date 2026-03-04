@@ -1,7 +1,4 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-import { usePalette } from "@/context/PaletteContext";
+import React from "react";
 
 interface TerminalSectionProps {
   children: React.ReactNode;
@@ -10,12 +7,9 @@ interface TerminalSectionProps {
 }
 
 const TerminalSection = ({ children, id, className = "" }: TerminalSectionProps) => {
-  const [systemRef, setSystemRef] = useState("");
-  const { currentPalette } = usePalette();
-  
-  useEffect(() => {
-    setSystemRef(`0x${Math.floor(Math.random() * 1000)}`);
-  }, []);
+  // generate once during render; this component is now a server component
+  const systemRef = `0x${Math.floor(Math.random() * 1000)}`;
+  // color handled via CSS variable --tint
 
   return (
     <section 
@@ -25,22 +19,22 @@ const TerminalSection = ({ children, id, className = "" }: TerminalSectionProps)
       {/* 1. VERTIKAL LINES */}
       <div 
         className="absolute inset-y-0 left-0 w-[1px] md:ml-12 ml-6 transition-all duration-500" 
-        style={{ background: `linear-gradient(to bottom, transparent, ${currentPalette.tint}33, transparent)` }} 
+        style={{ background: `linear-gradient(to bottom, transparent, var(--tint)33, transparent)` }} 
       />
       <div 
         className="absolute inset-y-0 right-0 w-[1px] md:mr-12 mr-6 transition-all duration-500" 
-        style={{ background: `linear-gradient(to bottom, transparent, ${currentPalette.tint}33, transparent)` }} 
+        style={{ background: `linear-gradient(to bottom, transparent, var(--tint)33, transparent)` }} 
       />
 
       {/* 2. HORIZONTAL DIVIDER */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-stone-800/50">
         <span 
           className="absolute md:left-12 left-6 -translate-x-1/2 -translate-y-1/2 text-[12px] font-mono leading-none bg-black z-20 transition-colors duration-500"
-          style={{ color: currentPalette.tint }}
+          style={{ color: 'var(--tint)' }}
         >+</span>
         <span 
           className="absolute md:right-12 right-6 translate-x-1/2 -translate-y-1/2 text-[12px] font-mono leading-none bg-black z-20 transition-colors duration-500"
-          style={{ color: currentPalette.tint }}
+          style={{ color: 'var(--tint)' }}
         >+</span>
       </div>
 
@@ -52,15 +46,15 @@ const TerminalSection = ({ children, id, className = "" }: TerminalSectionProps)
             <span 
               className="text-[10px] font-mono uppercase tracking-[0.4em] transition-all duration-500"
               style={{ 
-                color: currentPalette.tint,
-                filter: `drop-shadow(0 0 3px ${currentPalette.tint}99)`
+                color: 'var(--tint)',
+                filter: `drop-shadow(0 0 3px var(--tint)99)`
               }}
             >
               {`// MOD_ID: ${id || "GLOBAL"}`}
             </span>
             <div 
               className="h-[1px] flex-1 transition-colors duration-500" 
-              style={{ backgroundColor: `${currentPalette.tint}33` }}
+              style={{ backgroundColor: `var(--tint)33` }}
             />
           </div>
 

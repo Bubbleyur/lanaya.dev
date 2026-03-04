@@ -23,6 +23,12 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, []);
 
+  // write CSS custom properties whenever palette changes
+  useEffect(() => {
+    document.documentElement.style.setProperty('--tint', currentPalette.tint);
+    document.documentElement.style.setProperty('--background', currentPalette.background);
+  }, [currentPalette]);
+
   const setPalette = (id: string) => {
     const found = palettes.find(p => p.id === id);
     if (found) {
