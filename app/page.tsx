@@ -69,7 +69,7 @@ export default async function Home() {
                   className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-700/80 backdrop-blur-md"
                   style={{ 
                     borderColor: `var(--tint)44`,
-                    color: 'var(--tint)' }
+                    color: 'var(--tint)' 
                   }}
                 >
                   Get In Touch
