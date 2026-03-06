@@ -11,14 +11,6 @@ import { Brain, Quote } from "lucide-react";
 import { usePalette } from "@/context/PaletteContext";
 
 export default async function Home() {
-  // fetch projects on server side
-  let projects: ProjectItem[] = projectsData;
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`);
-    if (res.ok) projects = await res.json();
-  } catch (e) {
-    console.error('projects fetch failed', e);
-  }
 
   const { currentPalette } = usePalette();
 
