@@ -1,57 +1,31 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React from "react";
 import TextType from '@/components/typography/TextType';
 import { ProjectCard } from '@/components/portfolio/project-card';
-import { usePalette } from "@/context/PaletteContext";
 import TerminalSection from "@/components/ui/TerminalSection";
 import { projectsData, ProjectItem } from '@/constants/portfolio/project';
+import { getGithubProjects } from '@/lib/github';
 import { AboutCard } from "@/components/ui/AboutCard";
 import { LanyardCard } from "@/components/ui/LanyardCard";
 import { Brain, Quote } from "lucide-react";
+import { usePalette } from "@/context/PaletteContext";
 
-export default function Home() {
+export default async function Home() {
+  // fetch projects on server side
+  let projects: ProjectItem[] = projectsData;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`);
+    if (res.ok) projects = await res.json();
+  } catch (e) {
+    console.error('projects fetch failed', e);
+  }
+
   const { currentPalette } = usePalette();
-  const [projects, setProjects] = useState<ProjectItem[]>(projectsData);
-  const [githubProjects, setGithubProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Fetch projects
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projects`);
-        if (res.ok) {
-          setProjects(await res.json());
-        }
-      } catch (e) {
-        console.error('projects fetch failed', e);
-      }
-    };
+  // also fetch github repos for use elsewhere (server rendered)
+  const githubProjects = await getGithubProjects();
+  console.log('githubProjects count', githubProjects.length);
 
-    // Fetch GitHub repos
-    const fetchGithub = async () => {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        
-        const res = await fetch('/api/github', { signal: controller.signal });
-        clearTimeout(timeoutId);
-        
-        if (res.ok) {
-          setGithubProjects(await res.json());
-        }
-      } catch (e) {
-        console.error('github fetch failed', e);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-    fetchGithub();
-  }, []);
   return (
     <>
       {/* SECTION 1: HERO */}
@@ -63,12 +37,12 @@ export default function Home() {
           <div className="relative z-10 flex flex-col md:flex-row gap-12 items-start">
             <div className="flex-1 space-y-8">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-800 bg-stone-900/50" style={{ borderColor: `${currentPalette.tint}22` }}>
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: currentPalette.tint }} />
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-800 bg-stone-900/50" style={{ borderColor: `var(--tint)22` }}>
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: `${currentPalette.tint}` }} />
                   <span className="text-[10px] uppercase tracking-[0.3em] text-stone-300">PORTFOLIO v0.1.2</span>
                 </div>
                 
-                <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1] mix-blend-exclusion" style={{ color: `${currentPalette.tint}dd`, textShadow: `0 0 20px ${currentPalette.tint}` }}>
+                <h1 className="text-4xl md:text-7xl font-bold tracking-tighter leading-[1.1] mix-blend-exclusion" style={{ color: `var(--tint)`, textShadow: `0 0 20px var(--tint)` }}>
                   {/* @ts-ignore */}
                   <div className="cursor-target inline-block hover:bg-black/80 hover:backdrop-blur-sm duration-400">
                     <TextType
@@ -85,16 +59,16 @@ export default function Home() {
               </div>
 
               <p className="text-lg md:text-xl text-stone-200 font-md max-w-xl font-mono leading-relaxed bg-black/60 backdrop-blur-sm border border-white p-2">
-                <span style={{ color: currentPalette.tint }}>{`>`}</span> a junior developer dedicated to crafting seamless digital ecosystems and robust architecture.
+                <span style={{ color: `${currentPalette.tint}` }}>{`>`}</span> a junior developer dedicated to crafting seamless digital ecosystems and robust architecture.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
                 <a href="/projects"
                   className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:scale-[1.02] active:scale-95"
                   style={{ 
-                    backgroundColor: currentPalette.tint, 
-                    borderColor: currentPalette.tint,
-                    color: currentPalette.background 
+                    backgroundColor: `${currentPalette.tint}`, 
+                    borderColor: `${currentPalette.tint}`,
+                    color: 'var(--background, #000)' 
                   }}
                 >
                   See Doings
@@ -102,8 +76,8 @@ export default function Home() {
                 <a href="/about"
                   className="cursor-target px-8 py-3 border font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-stone-800 bg-stone-700/80 backdrop-blur-md"
                   style={{ 
-                    borderColor: `${currentPalette.tint}44`,
-                    color: currentPalette.tint 
+                    borderColor: `var(--tint)44`,
+                    color: `${currentPalette.tint}` 
                   }}
                 >
                   Get In Touch
@@ -114,12 +88,12 @@ export default function Home() {
             <div className="w-full md:w-80 space-y-4">
               <div 
                 className="p-6 border bg-black/60 backdrop-blur-sm space-y-5 font-mono text-[11px]"
-                style={{ borderColor: `${currentPalette.tint}22` }}
+                style={{ borderColor: `var(--tint)22` }}
               >
                 {/* Header */}
                 <div className="flex justify-between items-center uppercase tracking-widest text-stone-400">
                   <span>System Status</span>
-                  <span style={{ color: currentPalette.tint }}>ONLINE</span>
+                  <span style={{ color: `${currentPalette.tint}` }}>ONLINE</span>
                 </div>
 
                 {/* Divider */}
@@ -129,7 +103,7 @@ export default function Home() {
                 <div className="space-y-2 text-stone-300">
                   <div className="flex justify-between">
                     <span className="opacity-60">Availability</span>
-                    <span style={{ color: currentPalette.tint }}>Open for Work</span>
+                    <span style={{ color: `${currentPalette.tint}` }}>Open for Work</span>
                   </div>
 
                   <div className="flex justify-between">
@@ -165,7 +139,7 @@ export default function Home() {
                           className="h-full transition-all duration-500"
                           style={{
                             width: `${skill.value}%`,
-                            backgroundColor: currentPalette.tint
+                            backgroundColor: `${currentPalette.tint}`
                           }}
                         />
                       </div>
@@ -187,11 +161,11 @@ export default function Home() {
               <div className="cursor-target relative w-32 h-32 md:w-50 md:h-50 group">
                 <div 
                   className="absolute inset-0 border-2 z-10 transition-transform duration-300 group-hover:scale-105"
-                  style={{ borderColor: currentPalette.tint }}
+                  style={{ borderColor: `${currentPalette.tint}` }}
                 />
                 <div 
                   className="absolute -inset-2 border opacity-20 z-0 animate-pulse"
-                  style={{ borderColor: currentPalette.tint }}
+                  style={{ borderColor: `${currentPalette.tint}` }}
                 />
                 <Image 
                   src="https://res.cloudinary.com/drrleg8t2/image/upload/v1770549330/WhatsApp_Image_2026-02-08_at_18.09.29_e0caxm.jpg" // High quality stylized placeholder
@@ -201,7 +175,7 @@ export default function Home() {
                   sizes="(max-width: 768px) 128px, 200px"
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
-                <div className="absolute top-0 right-0 p-1 bg-black/80 z-20 text-[8px] font-mono tracking-tighter" style={{ color: currentPalette.tint }}>
+                <div className="absolute top-0 right-0 p-1 bg-black/80 z-20 text-[8px] font-mono tracking-tighter" style={{ color: `${currentPalette.tint}` }}>
                   ALAN_OS.IMG
                 </div>
               </div>
@@ -209,30 +183,30 @@ export default function Home() {
               <div className="space-y-4">
                 <span className="text-xs uppercase tracking-[0.5em] opacity-40">System_Profile</span>
                 <h2 className="cursor-target text-4xl md:text-6xl font-bold text-white tracking-tighter hover:bg-black/30 hover:backdrop-blur-sm duration-400">
-                  Who is <span style={{ color: `${currentPalette.tint}ee`, textShadow: `0 0 20px ${currentPalette.tint}` }}>Alan</span>?
+                  Who is <span style={{ color: `var(--tint)ee`, textShadow: `0 0 20px var(--tint)` }}>Alan</span>?
                 </h2>
               </div>
             </div>
 
             <div 
               className="max-w-xl p-8 border bg-stone-900/40 backdrop-blur-md relative"
-              style={{ borderColor: `${currentPalette.tint}33` }}
+              style={{ borderColor: `var(--tint)33` }}
             >
               <div 
                 className="absolute top-0 left-0 w-8 h-[2px]" 
-                style={{ borderColor: `${currentPalette.tint}33` }}
+                style={{ backgroundColor: `${currentPalette.tint}` }}
               />
               <div 
                 className="absolute top-0 left-0 w-[2px] h-8" 
-                style={{ borderColor: `${currentPalette.tint}33` }}
+                style={{ backgroundColor: `${currentPalette.tint}` }}
               />
               
               <div className="space-y-6">
                 <p 
                   className="text-lg md:text-xl font-mono leading-relaxed font-bold"
                   style={{ 
-                    color: `${currentPalette.tint}ff`,
-                    textShadow: `0 0 10px ${currentPalette.tint}ff`
+                    color: `var(--tint)ff`,
+                    textShadow: `0 0 10px var(--tint)44`
                   }}
                 >
                   <span className="opacity-50 mr-2">$</span> Decoding life through code, coffee, and constant curiosity. I specialize in bridging the gap between complex backend logic and intuitive, human-centric frontend experiences.

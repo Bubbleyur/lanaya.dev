@@ -10,8 +10,8 @@ interface PaletteContextType {
 
 const PaletteContext = createContext<PaletteContextType | undefined>(undefined);
 
-export const PaletteProvider: React.FC<{ children: React.ReactNode; initialPalette?: Palette }> = ({ children, initialPalette }) => {
-  const [currentPalette, setCurrentPaletteState] = useState<Palette>(initialPalette ?? defaultPalette);
+export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentPalette, setCurrentPaletteState] = useState<Palette>(defaultPalette);
 
   useEffect(() => {
     const savedPaletteId = localStorage.getItem('app-palette');
