@@ -44,7 +44,7 @@ export default async function RootLayout({
         className={`${bricolage.variable} ${workSans.variable} antialiased`}
         suppressHydrationWarning
       >
-        <PaletteProvider>
+        <PaletteProvider initialPalette={palette}>
           <PaletteSync />
           <TransitionProvider>
             <SmoothScrollProvider>
